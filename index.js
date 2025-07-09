@@ -47,10 +47,14 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [
+        process.env.FRONTEND_URL,
+        "https://hotel-reservation-system-lake.vercel.app/",
+        "https://hotel-reservation-system-kaushiks-projects-95f81bcb.vercel.app/",
+        "http://localhost:5173/"
+    ],
     credentials: true,
 }));
-
 
 // Routes
 app.use("/auth", authRoutes)
@@ -66,6 +70,7 @@ app.use("/bookings", bookingRoutes)
 // Auth endpoint
 app.post('/check', (req, res) => {
     const { auth_token } = req.cookies;
+    console.log('auth_token', auth_token)
     try {
         // Verifying token
         const decoded = jwt.verify(auth_token, process.env.JWT_SECRET_KEY);
