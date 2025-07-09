@@ -49,9 +49,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: [
         process.env.FRONTEND_URL,
-        "https://hotel-reservation-system-lake.vercel.app/",
-        "https://hotel-reservation-system-kaushiks-projects-95f81bcb.vercel.app/",
-        "http://localhost:5173/"
+        "https://hotel-reservation-system-lake.vercel.app",
+        "https://hotel-reservation-system-kaushiks-projects-95f81bcb.vercel.app",
+        "http://localhost:5173"
     ],
     credentials: true,
 }));

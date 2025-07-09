@@ -46,7 +46,9 @@ router.post("/login", [
         // Set HTTP cookie
         res.cookie("admin_auth_token", token, {
             httpOnly: true,
-            maxAge: 86400000 // 1 day
+            maxAge: 86400000, // 1 day
+            secure: true,
+            sameSite: 'none'
         });
 
         res.status(200).json({ adminId: admin._id });
@@ -95,7 +97,9 @@ router.post("/register", [
         // Set HTTP cookie
         res.cookie("admin_auth_token", token, {
             httpOnly: true,
-            maxAge: 86400000 // 1 day
+            maxAge: 86400000, // 1 day
+            secure: true,
+            sameSite: 'none'
         });
 
         res.status(201).json({ adminId: admin._id });
@@ -107,8 +111,10 @@ router.post("/register", [
 
 // Admin logout
 router.post("/logout", (req, res) => {
-    res.cookie("admin_auth_token", "", {
-        expires: new Date(0)
+    res.clearCookie("admin_auth_token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
     });
     res.send();
 });
